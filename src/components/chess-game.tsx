@@ -9,6 +9,7 @@ import {
   type Piece,
   type Board,
   type Position,
+  type PieceType,
 } from '@/lib/chess-logic';
 import { useSettings } from '@/hooks/use-settings';
 import {
@@ -32,7 +33,7 @@ export default function ChessGame() {
   const [moveCount, setMoveCount] = useState(0);
   const [timers, setTimers] = useState({ white: 600, black: 600 });
   const [gameOver, setGameOver] = useState<{ winner: Player | null, reason: string } | null>(null);
-  const [effects, setEffects] = useState<Record<string, string>>({}); // Key: "row,col", Value: "effectName"
+  const [effects, setEffects] = useState<Record<string, { name: string; pieceType?: PieceType }>>({});
 
   const { settings } = useSettings();
   const animationSpeedClass = `duration-${settings.animationSpeed}`;
@@ -68,17 +69,17 @@ export default function ChessGame() {
           if (capturedPiece?.type === 'king') {
             setGameOver({ winner: turn, reason: 'Checkmate!' });
             const key = `${row},${col}`;
-            setEffects(prev => ({ ...prev, [key]: 'checkmate' }));
+            setEffects(prev => ({ ...prev, [key]: { name: 'checkmate' } }));
           } else if (capturedPiece) {
             const key = `${row},${col}`;
-            setEffects(prev => ({ ...prev, [key]: 'capture' }));
+            setEffects(prev => ({ ...prev, [key]: { name: 'capture', pieceType: capturedPiece.type } }));
             setTimeout(() => {
                 setEffects(prev => {
                     const newEffects = { ...prev };
                     delete newEffects[key];
                     return newEffects;
                 });
-            }, 700);
+            }, 1000); // Increased duration for new effects
           }
 
           newBoard[row][col] = pieceToMove;

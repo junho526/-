@@ -1,6 +1,6 @@
 'use client';
 
-import { Board, Position } from '@/lib/chess-logic';
+import { Board, Position, PieceType } from '@/lib/chess-logic';
 import ChessSquare from './chess-square';
 
 interface ChessBoardProps {
@@ -9,7 +9,7 @@ interface ChessBoardProps {
   selectedPiece: Position | null;
   possibleMoves: Position[];
   animationSpeedClass: string;
-  effects: Record<string, string>;
+  effects: Record<string, { name: string; pieceType?: PieceType }>;
 }
 
 export default function ChessBoard({
@@ -22,14 +22,15 @@ export default function ChessBoard({
 }: ChessBoardProps) {
   return (
     <div
-      className="p-4 bg-primary/10 rounded-lg shadow-2xl border-4 border-primary/50"
+      className="p-4 bg-background rounded-lg shadow-2xl border-4 border-primary/20"
       style={{
-        backgroundImage:
-          'conic-gradient(from var(--gradient-angle) at 50% 50%, hsl(var(--secondary)), hsl(var(--background)), hsl(var(--secondary)))',
-        animation: 'gradient-spin 15s linear infinite',
+        backgroundImage: `
+          radial-gradient(ellipse at center, hsl(var(--secondary)) 0%, hsl(var(--background)) 75%)
+        `,
+        boxShadow: 'inset 0 0 80px 20px rgba(0,0,0,0.6)',
       }}
     >
-      <div className="grid grid-cols-8 grid-rows-8 aspect-square w-full max-w-[calc(100vh-12rem)] min-w-[300px] mx-auto border-2 border-accent/50 shadow-lg rounded-md overflow-hidden">
+      <div className="grid grid-cols-8 grid-rows-8 aspect-square w-full max-w-[calc(100vh-12rem)] min-w-[300px] mx-auto border-2 border-accent/20 shadow-lg rounded-md overflow-hidden">
         {board.map((row, rowIndex) =>
           row.map((piece, colIndex) => {
             const isLight = (rowIndex + colIndex) % 2 !== 0;
