@@ -151,6 +151,19 @@ export default {
             '0%': { transform: 'scale(1)', opacity: '1' },
             '100%': { transform: 'scale(2.5)', opacity: '0' }
         },
+        'board-shake': {
+          '0%': { transform: 'translate(1px, 1px) rotate(0deg)' },
+          '10%': { transform: 'translate(-1px, -2px) rotate(-1deg)' },
+          '20%': { transform: 'translate(-3px, 0px) rotate(1deg)' },
+          '30%': { transform: 'translate(3px, 2px) rotate(0deg)' },
+          '40%': { transform: 'translate(1px, -1px) rotate(1deg)' },
+          '50%': { transform: 'translate(-1px, 2px) rotate(-1deg)' },
+          '60%': { transform: 'translate(-3px, 1px) rotate(0deg)' },
+          '70%': { transform: 'translate(3px, 1px) rotate(-1deg)' },
+          '80%': { transform: 'translate(-1px, -1px) rotate(1deg)' },
+          '90%': { transform: 'translate(1px, 2px) rotate(0deg)' },
+          '100%': { transform: 'translate(1px, -2px) rotate(-1deg)' },
+        },
       },
       animation: {
         'accordion-down': 'accordion-down 0.2s ease-out',
@@ -168,6 +181,7 @@ export default {
         'rook-death': 'rook-death 1s ease-in-out forwards',
         'queen-death': 'queen-death 1s ease-in forwards',
         'king-death': 'king-death 0.8s ease-out forwards',
+        'board-shake': 'board-shake 0.5s cubic-bezier(.36,.07,.19,.97) both',
       },
     },
   },

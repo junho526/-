@@ -35,6 +35,7 @@ export default function ChessGame() {
   const [gameOver, setGameOver] = useState<{ winner: Player | null, reason: string } | null>(null);
   const [effects, setEffects] = useState<Record<string, { name: string; pieceType?: PieceType }>>({});
   const [dyingPieces, setDyingPieces] = useState<{ piece: Piece; position: Position; id: number }[]>([]);
+  const [isShaking, setIsShaking] = useState(false);
 
   const { settings } = useSettings();
   const animationSpeedClass = `duration-${settings.animationSpeed}`;
@@ -69,6 +70,11 @@ export default function ChessGame() {
           const capturedPiece = newBoard[row][col];
           if (capturedPiece) {
             const capturedPieceId = Date.now() + Math.random();
+
+            if (capturedPiece.type !== 'pawn' && capturedPiece.type !== 'king') {
+                setIsShaking(true);
+                setTimeout(() => setIsShaking(false), 500);
+            }
 
             if (capturedPiece.type === 'king') {
                 setGameOver({ winner: turn, reason: 'Checkmate!' });
@@ -130,6 +136,7 @@ export default function ChessGame() {
     setGameOver(null);
     setEffects({});
     setDyingPieces([]);
+    setIsShaking(false);
   };
 
 
@@ -150,6 +157,7 @@ export default function ChessGame() {
             animationSpeedClass={animationSpeedClass}
             effects={effects}
             dyingPieces={dyingPieces}
+            isShaking={isShaking}
          />
       </div>
       <AlertDialog open={!!gameOver}>

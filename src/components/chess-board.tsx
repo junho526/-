@@ -3,6 +3,7 @@
 import { Board, Position, PieceType, Piece } from '@/lib/chess-logic';
 import ChessSquare from './chess-square';
 import ChessPiece from './chess-piece';
+import { cn } from '@/lib/utils';
 
 interface ChessBoardProps {
   board: Board;
@@ -12,6 +13,7 @@ interface ChessBoardProps {
   animationSpeedClass: string;
   effects: Record<string, { name: string; pieceType?: PieceType }>;
   dyingPieces: { piece: Piece; position: Position; id: number }[];
+  isShaking: boolean;
 }
 
 export default function ChessBoard({
@@ -22,10 +24,14 @@ export default function ChessBoard({
   animationSpeedClass,
   effects,
   dyingPieces,
+  isShaking,
 }: ChessBoardProps) {
   return (
     <div
-      className="relative p-4 bg-background rounded-lg shadow-2xl border-4 border-primary/20"
+      className={cn(
+        "relative p-4 bg-background rounded-lg shadow-2xl border-4 border-primary/20",
+        isShaking && 'animate-board-shake'
+      )}
       style={{
         backgroundImage: `
           radial-gradient(ellipse at center, hsl(var(--secondary)) 0%, hsl(var(--background)) 75%)
