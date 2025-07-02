@@ -9,6 +9,7 @@ interface ChessBoardProps {
   selectedPiece: Position | null;
   possibleMoves: Position[];
   animationSpeedClass: string;
+  effects: Record<string, string>;
 }
 
 export default function ChessBoard({
@@ -16,12 +17,16 @@ export default function ChessBoard({
   onSquareClick,
   selectedPiece,
   possibleMoves,
-  animationSpeedClass
+  animationSpeedClass,
+  effects,
 }: ChessBoardProps) {
   return (
-    <div className="p-4 bg-primary/10 rounded-lg shadow-2xl border-4 border-primary/50"
+    <div
+      className="p-4 bg-primary/10 rounded-lg shadow-2xl border-4 border-primary/50"
       style={{
-        background: 'radial-gradient(circle, hsl(var(--secondary)) 0%, hsl(var(--background)) 100%)'
+        backgroundImage:
+          'conic-gradient(from var(--gradient-angle) at 50% 50%, hsl(var(--secondary)), hsl(var(--background)), hsl(var(--secondary)))',
+        animation: 'gradient-spin 15s linear infinite',
       }}
     >
       <div className="grid grid-cols-8 grid-rows-8 aspect-square w-full max-w-[calc(100vh-12rem)] min-w-[300px] mx-auto border-2 border-accent/50 shadow-lg rounded-md overflow-hidden">
@@ -33,6 +38,7 @@ export default function ChessBoard({
             const isPossibleMove = possibleMoves.some(
               (p) => p.row === rowIndex && p.col === colIndex
             );
+            const key = `${rowIndex},${colIndex}`;
 
             return (
               <ChessSquare
@@ -43,6 +49,7 @@ export default function ChessBoard({
                 isPossibleMove={isPossibleMove}
                 onClick={() => onSquareClick(rowIndex, colIndex)}
                 animationSpeedClass={animationSpeedClass}
+                effect={effects[key]}
               />
             );
           })

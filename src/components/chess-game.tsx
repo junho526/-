@@ -32,6 +32,7 @@ export default function ChessGame() {
   const [moveCount, setMoveCount] = useState(0);
   const [timers, setTimers] = useState({ white: 600, black: 600 });
   const [gameOver, setGameOver] = useState<{ winner: Player | null, reason: string } | null>(null);
+  const [effects, setEffects] = useState<Record<string, string>>({}); // Key: "row,col", Value: "effectName"
 
   const { settings } = useSettings();
   const animationSpeedClass = `duration-${settings.animationSpeed}`;
@@ -63,10 +64,21 @@ export default function ChessGame() {
           const newBoard = board.map((r) => [...r]);
           const pieceToMove = newBoard[selectedPiece.row][selectedPiece.col];
 
-          // Check for capture
           const capturedPiece = newBoard[row][col];
           if (capturedPiece?.type === 'king') {
-             setGameOver({ winner: turn, reason: 'Checkmate!' });
+            setGameOver({ winner: turn, reason: 'Checkmate!' });
+            const key = `${row},${col}`;
+            setEffects(prev => ({ ...prev, [key]: 'checkmate' }));
+          } else if (capturedPiece) {
+            const key = `${row},${col}`;
+            setEffects(prev => ({ ...prev, [key]: 'capture' }));
+            setTimeout(() => {
+                setEffects(prev => {
+                    const newEffects = { ...prev };
+                    delete newEffects[key];
+                    return newEffects;
+                });
+            }, 700);
           }
 
           newBoard[row][col] = pieceToMove;
@@ -101,6 +113,7 @@ export default function ChessGame() {
     setMoveCount(0);
     setTimers({ white: 600, black: 600 });
     setGameOver(null);
+    setEffects({});
   };
 
 
@@ -119,6 +132,7 @@ export default function ChessGame() {
             selectedPiece={selectedPiece}
             possibleMoves={possibleMoves}
             animationSpeedClass={animationSpeedClass}
+            effects={effects}
          />
       </div>
       <AlertDialog open={!!gameOver}>

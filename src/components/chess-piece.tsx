@@ -19,7 +19,7 @@ const Knight: React.FC<{ color: string }> = ({ color }) => (
   <svg viewBox="0 0 45 45" className={color}><g fill="none" fillRule="evenodd" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5"><path d="M9.5 24.5C14.5 29 16.5 32 16.5 34.5s-1.5 4.5-4.5 4.5-5-2-5-4.5c0-2.5 2.5-5.5 4.5-7.5zM22.5 39H9.5" /><path d="M19 14.5c-1-2-3.5-3.5-3.5-3.5-1.5-1-2.5-1-3.5 0-1.5 1-1.5 2.5-1.5 2.5s-1.5-1.5-3-1.5c-1.5 0-2.5 1-2.5 2.5s1 2.5 2.5 2.5c1.5 0 3-1.5 3-1.5s1.5 1.5 3 1.5c1.5 0 2.5-1 2.5-2.5s-1-2.5-2.5-2.5c-.5 0-1 .5-1 .5" /><path d="M19 14.5s0-2.5 2.5-4c2-1 4.5-1 5.5 1s.5 4.5-1 5c-1 1-2.5 1-2.5 1" fill="currentColor" /><path d="M26 15.5c-2.5 2.5-5 3.5-5 3.5-1.5 2-1.5 4.5 0 6 1.5 1.5 3.5 1.5 5 0s2-3.5 2-3.5" fill="currentColor" /><path d="M26 18s-1.5-1-1.5-2.5c0-1 .5-2 1.5-2.5s2.5 0 2.5 1.5c0 1.5-1 2.5-2.5 3.5z" /><path d="M25 39c-5-5-5.5-12.5-6-16.5-2-2-4.5-4-4.5-4s1-2.5 3.5-4.5c2-1.5 4.5-2.5 4.5-2.5s2.5 1 5 3.5c2.5 2.5 4 5 4 5s-2.5 2-4.5 4c-.5 4-1 11.5-6 16.5z" fill="currentColor" /><path d="M25 39c-.5-5-1-11-1.5-14" /><path d="M14.5 14.5c1.5-1 2.5-2 2.5-3 .5-1.5 0-2.5-1-2.5s-1.5 1.5-1.5 3" /><path d="M15.5 21.5c-1-1-2.5-2-2.5-3s0-1.5 1-2c1-.5 1.5 0 1.5 1" /></g></svg>
 );
 const Pawn: React.FC<{ color: string }> = ({ color }) => (
-  <svg viewBox="0 0 45 45" className={color}><g fill="none" fillRule="evenodd" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5"><path d="M22.5 9.5c2.21 0 4 1.79 4 4 0 2.21-1.79 4-4 4-2.21 0-4-1.79-4-4 0-2.21 1.79-4 4-4z" fill="currentColor" /><path d="M22.5 13.5s-4-2.5-4-5c0-1.5 1-2.5 1.5-2.5 1 0 1.5 1.5 1.5 1.5s-1.5-1.5-1.5-2.5c0-1 .5-1.5 1-1.5s1 1 1 2.5c0 2.5-4 5-4 5" /><path d="M22.5 13.5s4-2.5 4-5c0-1.5-1-2.5-1.5-2.5-1 0-1.5 1.5-1.5 1.5s1.5-1.5 1.5-2.5c0-1-.5-1.5-1-1.5s-1 1-1 2.5c0 2.5 4 5 4 5" /><path d="M13.5 39.5h18v-2h-18v2zM15.5 37.5v-7h14v7zM15.5 25.5h14" /><path d="M15.5 30.5c-3-2-4-4-4-5.5 0-1.5.5-3 2.5-3s4.5 1 4.5 1" fill="currentColor" /><path d="M30.5 30.5c3-2 4-4 4-5.5 0-1.5-.5-3-2.5-3s-4.5 1-4.5 1" fill="currentColor" /></g></svg>
+  <svg viewBox="0 0 45 45" className={color}><g fill="none" fillRule="evenodd" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5"><path d="M22.5 9.5c2.21 0 4 1.79 4 4 0 2.21-1.79 4-4 4-2.21 0-4-1.79-4-4 0-2.21 1.79-4 4-4z" fill="currentColor" /><path d="M22.5 13.5s-4-2.5-4-5c0-1.5 1-2.5 1.5-2.5 1 0 1.5 1.5 1.5 1.5s-1.5-1.5-1.5-2.5c0-1-.5-1.5-1-1.5s1 1 1 2.5c0 2.5-4 5-4 5" /><path d="M22.5 13.5s4-2.5 4-5c0-1.5-1-2.5-1.5-2.5-1 0-1.5 1.5-1.5 1.5s1.5-1.5 1.5-2.5c0-1-.5-1.5-1-1.5s-1 1-1 2.5c0 2.5 4 5 4 5" /><path d="M13.5 39.5h18v-2h-18v2zM15.5 37.5v-7h14v7zM15.5 25.5h14" /><path d="M15.5 30.5c-3-2-4-4-4-5.5 0-1.5.5-3 2.5-3s4.5 1 4.5 1" fill="currentColor" /><path d="M30.5 30.5c3-2 4-4 4-5.5 0-1.5-.5-3-2.5-3s-4.5 1-4.5 1" fill="currentColor" /></g></svg>
 );
 
 
@@ -35,15 +35,20 @@ const pieceComponents: Record<string, React.FC<{ color: string }>> = {
 interface ChessPieceProps {
   piece: Piece;
   animationSpeedClass: string;
+  isSelected: boolean;
 }
 
-export default function ChessPiece({ piece, animationSpeedClass }: ChessPieceProps) {
+export default function ChessPiece({ piece, animationSpeedClass, isSelected }: ChessPieceProps) {
   const PieceComponent = pieceComponents[piece.type];
   const colorClass = piece.color === 'white' ? 'text-primary-foreground fill-primary-foreground stroke-primary' : 'text-primary fill-primary stroke-primary-foreground';
 
   return (
     <div
-      className={cn('w-[85%] h-[85%] z-10 transition-transform transform will-change-transform', animationSpeedClass)}
+      className={cn(
+        'w-[85%] h-[85%] z-10 transition-transform transform will-change-transform',
+        animationSpeedClass,
+        isSelected && 'scale-110 drop-shadow-lg'
+      )}
     >
       {PieceComponent && <PieceComponent color={colorClass} />}
     </div>

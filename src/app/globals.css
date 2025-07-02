@@ -2,6 +2,21 @@
 @tailwind components;
 @tailwind utilities;
 
+@property --gradient-angle {
+  syntax: '<angle>';
+  initial-value: 0deg;
+  inherits: false;
+}
+
+@keyframes gradient-spin {
+  0% {
+    --gradient-angle: 0deg;
+  }
+  100% {
+    --gradient-angle: 360deg;
+  }
+}
+
 @layer base {
   :root {
     --background: 240 67% 94%;

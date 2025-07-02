@@ -88,10 +88,30 @@ export default {
             height: '0',
           },
         },
+        sparkle: {
+          '0%': { transform: 'scale(0) rotate(0deg)', opacity: '1' },
+          '50%': { transform: 'scale(1.5) rotate(180deg)', opacity: '0.5' },
+          '100%': { transform: 'scale(1) rotate(360deg)', opacity: '0' },
+        },
+        'pulse-bright': {
+          '0%, 100%': { transform: 'scale(1)', opacity: '0.6' },
+          '50%': { transform: 'scale(1.2)', opacity: '1' },
+        },
+        'king-in-danger': {
+          '0%, 100%': {
+            boxShadow: 'inset 0 0 15px 5px hsl(var(--destructive) / 0.5)',
+          },
+          '50%': {
+            boxShadow: 'inset 0 0 25px 10px hsl(var(--destructive) / 0.8)',
+          },
+        },
       },
       animation: {
         'accordion-down': 'accordion-down 0.2s ease-out',
         'accordion-up': 'accordion-up 0.2s ease-out',
+        sparkle: 'sparkle 0.7s ease-out forwards',
+        'pulse-bright': 'pulse-bright 1.5s infinite ease-in-out',
+        'king-in-danger': 'king-in-danger 1.2s infinite ease-in-out',
       },
     },
   },
