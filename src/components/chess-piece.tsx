@@ -36,18 +36,30 @@ interface ChessPieceProps {
   piece: Piece;
   animationSpeedClass: string;
   isSelected: boolean;
+  isDying?: boolean;
 }
 
-export default function ChessPiece({ piece, animationSpeedClass, isSelected }: ChessPieceProps) {
+export default function ChessPiece({ piece, animationSpeedClass, isSelected, isDying = false }: ChessPieceProps) {
   const PieceComponent = pieceComponents[piece.type];
   const colorClass = piece.color === 'white' ? 'text-primary-foreground fill-primary-foreground/80 stroke-primary' : 'text-primary fill-primary/80 stroke-primary-foreground';
+  
+  const deathAnimationClass = isDying ? {
+    'pawn': 'animate-pawn-death',
+    'knight': 'animate-knight-death',
+    'bishop': 'animate-bishop-death',
+    'rook': 'animate-rook-death',
+    'queen': 'animate-queen-death',
+    'king': 'animate-king-death'
+  }[piece.type] : '';
 
   return (
     <div
       className={cn(
         'w-[85%] h-[85%] z-10 transition-transform transform will-change-transform drop-shadow-[0_4px_4px_rgba(0,0,0,0.4)]',
         animationSpeedClass,
-        isSelected && 'scale-125 drop-shadow-[0_8px_10px_rgba(0,0,0,0.5)]'
+        isSelected && !isDying && 'scale-125 drop-shadow-[0_8px_10px_rgba(0,0,0,0.5)]',
+        isDying && 'z-30',
+        deathAnimationClass
       )}
     >
       {PieceComponent && <PieceComponent color={colorClass} />}

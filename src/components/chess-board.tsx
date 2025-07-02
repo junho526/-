@@ -1,7 +1,8 @@
 'use client';
 
-import { Board, Position, PieceType } from '@/lib/chess-logic';
+import { Board, Position, PieceType, Piece } from '@/lib/chess-logic';
 import ChessSquare from './chess-square';
+import ChessPiece from './chess-piece';
 
 interface ChessBoardProps {
   board: Board;
@@ -10,6 +11,7 @@ interface ChessBoardProps {
   possibleMoves: Position[];
   animationSpeedClass: string;
   effects: Record<string, { name: string; pieceType?: PieceType }>;
+  dyingPieces: { piece: Piece; position: Position; id: number }[];
 }
 
 export default function ChessBoard({
@@ -19,10 +21,11 @@ export default function ChessBoard({
   possibleMoves,
   animationSpeedClass,
   effects,
+  dyingPieces,
 }: ChessBoardProps) {
   return (
     <div
-      className="p-4 bg-background rounded-lg shadow-2xl border-4 border-primary/20"
+      className="relative p-4 bg-background rounded-lg shadow-2xl border-4 border-primary/20"
       style={{
         backgroundImage: `
           radial-gradient(ellipse at center, hsl(var(--secondary)) 0%, hsl(var(--background)) 75%)
@@ -56,6 +59,23 @@ export default function ChessBoard({
           })
         )}
       </div>
+      {dyingPieces.map(({ piece, position, id }) => (
+        <div
+          key={id}
+          className="absolute flex items-center justify-center w-[12.5%] h-[12.5%] pointer-events-none z-20"
+          style={{
+            top: `${position.row * 12.5}%`,
+            left: `${position.col * 12.5}%`,
+          }}
+        >
+          <ChessPiece
+            piece={piece}
+            animationSpeedClass={animationSpeedClass}
+            isSelected={false}
+            isDying={true}
+          />
+        </div>
+      ))}
     </div>
   );
 }

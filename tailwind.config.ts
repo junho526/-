@@ -125,6 +125,32 @@ export default {
             '0%': { transform: 'scale(0.2)', opacity: '1' },
             '100%': { transform: 'scale(2)', opacity: '0' },
         },
+        'pawn-death': {
+          '0%': { opacity: '1', transform: 'translateY(0) rotate(0deg)' },
+          '100%': { opacity: '0', transform: 'translateY(20px) rotate(25deg)' }
+        },
+        'knight-death': {
+            '0%': { opacity: '1', transform: 'scale(1) rotate(0)' },
+            '100%': { opacity: '0', transform: 'scale(0.5) rotate(720deg)' }
+        },
+        'bishop-death': {
+            '0%': { opacity: '1' },
+            '100%': { opacity: '0', clipPath: 'polygon(0 0, 100% 0, 100% 0, 0 0)' }
+        },
+        'rook-death': {
+            '0%': { opacity: '1', transform: 'translateY(0)' },
+            '30%': { transform: 'translateY(-10px) skewX(5deg)' },
+            '60%': { transform: 'translateY(5px) skewX(-5deg)' },
+            '100%': { opacity: '0', transform: 'translateY(30px) scale(0.8)' }
+        },
+        'queen-death': {
+            '0%': { opacity: '1', transform: 'scale(1) rotate(0)' },
+            '100%': { opacity: '0', transform: 'scale(0) rotate(-180deg)' }
+        },
+        'king-death': {
+            '0%': { transform: 'scale(1)', opacity: '1' },
+            '100%': { transform: 'scale(2.5)', opacity: '0' }
+        },
       },
       animation: {
         'accordion-down': 'accordion-down 0.2s ease-out',
@@ -136,6 +162,12 @@ export default {
         'bishop-beam': 'bishop-beam 0.7s ease-out forwards',
         'rook-smash': 'rook-smash 0.6s cubic-bezier(0.785, 0.135, 0.150, 0.860) forwards',
         'queen-blast': 'queen-blast 0.8s ease-out forwards',
+        'pawn-death': 'pawn-death 1s ease-in forwards',
+        'knight-death': 'knight-death 1s ease-in-out forwards',
+        'bishop-death': 'bishop-death 1s ease-out forwards',
+        'rook-death': 'rook-death 1s ease-in-out forwards',
+        'queen-death': 'queen-death 1s ease-in forwards',
+        'king-death': 'king-death 0.8s ease-out forwards',
       },
     },
   },

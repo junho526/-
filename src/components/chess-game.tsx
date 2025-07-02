@@ -34,6 +34,7 @@ export default function ChessGame() {
   const [timers, setTimers] = useState({ white: 600, black: 600 });
   const [gameOver, setGameOver] = useState<{ winner: Player | null, reason: string } | null>(null);
   const [effects, setEffects] = useState<Record<string, { name: string; pieceType?: PieceType }>>({});
+  const [dyingPieces, setDyingPieces] = useState<{ piece: Piece; position: Position; id: number }[]>([]);
 
   const { settings } = useSettings();
   const animationSpeedClass = `duration-${settings.animationSpeed}`;
@@ -66,20 +67,33 @@ export default function ChessGame() {
           const pieceToMove = newBoard[selectedPiece.row][selectedPiece.col];
 
           const capturedPiece = newBoard[row][col];
-          if (capturedPiece?.type === 'king') {
-            setGameOver({ winner: turn, reason: 'Checkmate!' });
-            const key = `${row},${col}`;
-            setEffects(prev => ({ ...prev, [key]: { name: 'checkmate' } }));
-          } else if (capturedPiece) {
-            const key = `${row},${col}`;
-            setEffects(prev => ({ ...prev, [key]: { name: 'capture', pieceType: capturedPiece.type } }));
-            setTimeout(() => {
-                setEffects(prev => {
-                    const newEffects = { ...prev };
-                    delete newEffects[key];
-                    return newEffects;
-                });
-            }, 1000); // Increased duration for new effects
+          if (capturedPiece) {
+            const capturedPieceId = Date.now() + Math.random();
+
+            if (capturedPiece.type === 'king') {
+                setGameOver({ winner: turn, reason: 'Checkmate!' });
+                const key = `${row},${col}`;
+                setEffects(prev => ({ ...prev, [key]: { name: 'checkmate' } }));
+                setDyingPieces(prev => [...prev, { piece: capturedPiece, position: { row, col }, id: capturedPieceId }]);
+                 setTimeout(() => {
+                    setDyingPieces(prev => prev.filter(p => p.id !== capturedPieceId));
+                }, 1000);
+            } else {
+                setDyingPieces(prev => [...prev, { piece: capturedPiece, position: { row, col }, id: capturedPieceId }]);
+                setTimeout(() => {
+                    setDyingPieces(prev => prev.filter(p => p.id !== capturedPieceId));
+                }, 1000); // Remove after animation
+
+                const key = `${row},${col}`;
+                setEffects(prev => ({ ...prev, [key]: { name: 'capture', pieceType: capturedPiece.type } }));
+                setTimeout(() => {
+                    setEffects(prev => {
+                        const newEffects = { ...prev };
+                        delete newEffects[key];
+                        return newEffects;
+                    });
+                }, 1000);
+            }
           }
 
           newBoard[row][col] = pieceToMove;
@@ -115,6 +129,7 @@ export default function ChessGame() {
     setTimers({ white: 600, black: 600 });
     setGameOver(null);
     setEffects({});
+    setDyingPieces([]);
   };
 
 
@@ -134,6 +149,7 @@ export default function ChessGame() {
             possibleMoves={possibleMoves}
             animationSpeedClass={animationSpeedClass}
             effects={effects}
+            dyingPieces={dyingPieces}
          />
       </div>
       <AlertDialog open={!!gameOver}>
